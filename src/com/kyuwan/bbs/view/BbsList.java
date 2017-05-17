@@ -22,16 +22,6 @@ public class BbsList {
 
 	}
 
-	// 상세보기 이동
-	public void goDetail(ArrayList<Bbs> datas, long id) {
-		for(Bbs bbs : datas){
-			if(bbs.getId() == id){
-				BbsDetail detail = new BbsDetail();
-				detail.showDetail(bbs);
-				break; 
-			}
-		}
-	}
 
 	// 검색
 	public void search(String word) {

@@ -1,5 +1,6 @@
 package com.kyuwan.bbs.presenter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +17,8 @@ public class BbsPresenter {
 
 	// 데이터 임시 저장소
 	ArrayList<Bbs> datas;
+
+	int number = 0;
 
 	Scanner sc;
 	BbsInput input;
@@ -36,29 +39,61 @@ public class BbsPresenter {
 	public void start() {
 
 		while (runFLAG) {
-			System.out.println(" 명령어 입력 [ 1: 목록 2: 쓰기 3:상세보기 ]");
-			int command = sc.nextInt();
+			System.out.println("명령어 입력 [ l: 목록 w: 쓰기 d:상세보기 ]");
+			String command = sc.nextLine();
 
 			switch (command) {
-			case 1: {
+			case "l": {
 				list.showList(datas);
 				break;
 			}
-			case 2: {
-				Bbs bbs = input.process(sc);
-				datas.add(bbs);
+			case "w": {
 
-				// datas.add(input.process(sc));
-
+				write();
 				break;
 			}
-			case 3: {
+			case "d": {
+
+				goDetail();
 				break;
 			}
 			}
 
 		}
 
+	}
+
+	public void write() {
+		Bbs bbs = input.process(sc);
+		// 글번호를 추가하기 위한 영역
+
+		number = number + 1;
+
+		bbs.setId(number);
+		bbs.setDate(getDate());
+		datas.add(bbs);
+		// datas.add(input.process(sc));
+	}
+	
+	private String getDate(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+		long currentTime = System.currentTimeMillis();
+		return sdf.format(currentTime);
+	}
+
+	// 상세보기 이동
+	public void goDetail() {
+		System.out.println("글번호를 입력하세요");
+		String temp = sc.nextLine();
+		long id = Long.parseLong(temp);
+
+		for (Bbs bbs : datas) {
+			if (bbs.getId() == id) {
+				detail.showDetail(bbs);
+
+				break;
+			}
+		}
 	}
 
 	public void end() {
