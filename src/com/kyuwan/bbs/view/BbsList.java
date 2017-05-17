@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import com.kyuwan.bbs.model.Bbs;
 
 public class BbsList {
-	// 리스트에서 보여줄 저장소
-	ArrayList<Bbs> datas = new ArrayList<>();
-
+	
 	// 목록 보여주기
-	public void showList() {
+	public void showList(ArrayList<Bbs> datas) {
 		for (Bbs bbs : datas) {
 			System.out.print(bbs.getId() + " | ");
 			System.out.print(bbs.getTitle() + " | ");
@@ -25,8 +23,14 @@ public class BbsList {
 	}
 
 	// 상세보기 이동
-	public void goDetail(long id) {
-
+	public void goDetail(ArrayList<Bbs> datas, long id) {
+		for(Bbs bbs : datas){
+			if(bbs.getId() == id){
+				BbsDetail detail = new BbsDetail();
+				detail.showDetail(bbs);
+				break; 
+			}
+		}
 	}
 
 	// 검색
