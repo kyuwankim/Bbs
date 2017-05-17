@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kyuwan.bbs.model.Bbs;
+import com.kyuwan.bbs.view.BbsDetail;
 import com.kyuwan.bbs.view.BbsInput;
+import com.kyuwan.bbs.view.BbsList;
 
 public class BbsPresenter {
 
@@ -17,6 +19,8 @@ public class BbsPresenter {
 
 	Scanner sc;
 	BbsInput input;
+	BbsList list;
+	BbsDetail detail;
 
 	/**
 	 * 사용할 객체들을 미리 메모리에 로드해둔다, 초기화
@@ -24,6 +28,8 @@ public class BbsPresenter {
 	public BbsPresenter() {
 		sc = new Scanner(System.in);
 		input = new BbsInput();
+		list = new BbsList();
+		detail = new BbsDetail();
 		datas = new ArrayList<>();
 	}
 
@@ -35,12 +41,13 @@ public class BbsPresenter {
 
 			switch (command) {
 			case 1: {
+				list.showList(datas);
 				break;
 			}
 			case 2: {
 				Bbs bbs = input.process(sc);
 				datas.add(bbs);
-				
+
 				// datas.add(input.process(sc));
 
 				break;
