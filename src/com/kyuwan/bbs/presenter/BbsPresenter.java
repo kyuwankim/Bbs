@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kyuwan.bbs.model.Bbs;
+import com.kyuwan.bbs.model.BbsLoader;
 import com.kyuwan.bbs.view.BbsDetail;
 import com.kyuwan.bbs.view.BbsInput;
 import com.kyuwan.bbs.view.BbsList;
@@ -24,6 +25,7 @@ public class BbsPresenter {
 	BbsInput input;
 	BbsList list;
 	BbsDetail detail;
+	BbsLoader loader;
 
 	/**
 	 * 사용할 객체들을 미리 메모리에 로드해둔다, 초기화
@@ -33,6 +35,7 @@ public class BbsPresenter {
 		input = new BbsInput();
 		list = new BbsList();
 		detail = new BbsDetail();
+		loader = new BbsLoader();
 		datas = new ArrayList<>();
 	}
 
@@ -71,6 +74,8 @@ public class BbsPresenter {
 
 		bbs.setId(number);
 		bbs.setDate(getDate());
+		
+		loader.write(bbs);
 		datas.add(bbs);
 		// datas.add(input.process(sc));
 	}
